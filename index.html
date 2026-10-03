@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OERTHEL — Welkom</title>
+<meta name="description" content="OERTHEL zit in de testfase. Test gratis OERTHEL BLACK SYSTEM01 of OERTHEL WHITE SYSTEM02.">
+<meta name="theme-color" content="#080808">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#080808; --dark:#161616; --white:#f5f5f0; --off:#d8d8d2; --muted:#888880; --red:#c8281e;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--black);color:var(--white);font-family:'Manrope',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
+.brand{position:fixed;top:0;left:0;right:0;z-index:40;text-align:center;padding:calc(20px + env(safe-area-inset-top)) 0 20px;
+  font-weight:800;font-size:15px;letter-spacing:.35em;text-indent:.35em;background:linear-gradient(to bottom,rgba(8,8,8,.95),transparent)}
+
+/* scroll stages */
+.stage{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:96px 24px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+.hero h1{font-weight:800;line-height:.95;letter-spacing:-.04em;text-transform:uppercase;font-size:clamp(44px,17vw,150px)}
+.hero h1 span{display:block}
+.hero .ch{display:inline-block;opacity:0;transform:translateY(.4em);animation:ch .9s var(--ease) forwards}
+@keyframes ch{to{opacity:1;transform:none}}
+.hero .small{font-size:clamp(28px,10vw,90px);font-weight:300;letter-spacing:-.02em;color:var(--muted);margin-bottom:.2em}
+.scroll-line{position:absolute;bottom:calc(32px + env(safe-area-inset-bottom));left:50%;width:1px;height:56px;background:linear-gradient(var(--white),transparent);opacity:0;animation:fade 1s 2s forwards}
+@keyframes fade{to{opacity:.6}}
+.hero{position:relative}
+
+.line{font-weight:800;letter-spacing:-.035em;line-height:1.05;font-size:clamp(34px,11vw,110px)}
+.line.light{font-weight:300}
+.line em{font-style:normal;color:var(--muted);font-weight:300}
+.line{width:100%;text-align:center}
+.num{font-size:clamp(76px,30vw,320px);font-weight:800;letter-spacing:-.06em;line-height:.85;display:block;width:100%;text-align:center;padding-right:.06em}
+.num-label{display:block;width:100%;text-align:center;margin-top:18px;font-size:clamp(14px,4vw,24px);font-weight:300;letter-spacing:.02em;text-indent:.02em;color:var(--off)}
+
+/* products */
+.products{padding:120px 20px 40px;max-width:760px;margin:0 auto}
+.test-note{text-align:center;max-width:34ch;margin:0 auto 64px}
+.test-note h2{font-size:clamp(30px,9vw,52px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:24px}
+.test-note p{font-size:clamp(15px,4vw,18px);font-weight:300;line-height:1.65;color:var(--off)}
+.test-note p+p{margin-top:16px}
+.test-note b{font-weight:600;color:var(--white)}
+.cans{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pick-title{text-align:center;font-size:clamp(24px,7vw,36px);font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+.pick-sub{text-align:center;font-size:15px;font-weight:300;color:var(--off);margin-bottom:24px}
+.can{background:none;border:1px solid rgba(255,255,255,.18);color:inherit;font:inherit;cursor:pointer;text-align:center;padding:22px 10px 16px;border-radius:40px;transition:border-color .3s,opacity .4s,background .3s}
+.can:hover{border-color:rgba(255,255,255,.6)}
+.cans.picked .can[aria-pressed="false"]{opacity:.45}
+.can[aria-pressed="true"]{border-color:var(--white);background:rgba(255,255,255,.04)}
+.pick-btn{display:block;margin:14px 6px 0;padding:11px 0;border:1px solid var(--white);border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;transition:background .3s,color .3s}
+.can[aria-pressed="true"] .pick-btn{background:var(--white);color:var(--black)}
+.cans.nudge{animation:nudge .5s}
+@keyframes nudge{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.can-img{height:clamp(300px,78vw,470px);display:flex;align-items:center;justify-content:center}
+.can-img img{height:100%;width:auto;max-width:100%;object-fit:contain;display:block}
+.can-name{margin-top:4px;font-weight:800;font-size:clamp(12px,3.4vw,16px);letter-spacing:.14em;line-height:1.5}
+.can-name small{display:block;font-weight:300;color:var(--muted);letter-spacing:.14em;font-size:.8em}
+.can:focus-visible,input:focus-visible,button.go:focus-visible{outline:2px solid var(--white);outline-offset:4px}
+
+.info{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px;text-align:center}
+.info .about{font-size:13px;font-weight:300;line-height:1.65;color:var(--off)}
+.info .about strong{color:var(--white);font-weight:600}
+.info .ingr{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;line-height:1.6;color:var(--off);font-weight:300}
+.info .ingr span{display:block;color:var(--muted);margin-bottom:4px}
+.info .ingr b{color:var(--white);font-weight:600}
+
+/* form */
+form{max-width:480px;margin:72px auto 0}
+.field{margin-bottom:22px}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px}
+input[type=text],input[type=email]{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.25);color:var(--white);
+  font:inherit;font-size:16px;padding:10px 0;border-radius:0;transition:border-color .3s}
+input:focus{border-color:var(--white);outline:none}
+.row{display:grid;grid-template-columns:1fr 2fr;gap:20px}
+.choice{font-size:14px;font-weight:600;margin:6px 0 30px;min-height:1.4em}
+button.go{width:100%;background:var(--white);color:var(--black);border:0;font:inherit;font-weight:800;font-size:15px;letter-spacing:.12em;text-transform:uppercase;padding:20px;cursor:pointer;transition:background .3s}
+button.go:hover{background:var(--off)}
+button.go:disabled{opacity:.5}
+.err{color:#ff6b61;font-size:14px;margin-top:16px;min-height:1.2em}
+.done{display:none;text-align:center;padding:48px 0;animation:fadeIn .6s var(--ease)}
+.done .icon{width:64px;height:64px;border:2px solid #27ae60;border-radius:50%;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;background:rgba(39,174,96,.08)}
+.done .icon svg{width:26px;height:26px;stroke:#27ae60;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.done h2{font-size:clamp(24px,7vw,34px);font-weight:800;letter-spacing:-.03em;margin-bottom:14px}
+.done p{color:var(--off);font-weight:300;line-height:1.7;max-width:420px;margin:0 auto}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#successBanner{position:fixed;top:0;left:0;right:0;z-index:9998;background:#1a5c35;border-bottom:2px solid #27ae60;padding:0 20px;padding-top:env(safe-area-inset-top);height:0;overflow:hidden;opacity:0;display:flex;align-items:center;gap:14px;transition:height .5s var(--ease),opacity .5s var(--ease)}
+#successBanner.show{height:calc(84px + env(safe-area-inset-top));opacity:1}
+.sb-icon{flex-shrink:0;width:32px;height:32px;background:#27ae60;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.sb-icon svg{width:16px;height:16px;stroke:#fff;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sb-text{font-size:13px;font-weight:600;line-height:1.4;color:#fff}
+.sb-text strong{font-weight:800;color:#7fffb2}
+.sb-close{margin-left:auto;background:none;border:0;color:rgba(255,255,255,.6);font-size:24px;line-height:1;padding:4px 8px;cursor:pointer}
+.sb-close:hover{color:#fff}
+.sent form{display:none}.sent .done{display:block}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:72px 24px calc(40px + env(safe-area-inset-bottom))}
+.hp{position:absolute;left:-9999px}
+
+@media (prefers-reduced-motion:reduce){.cans.nudge{animation:none}.reveal{transition:none;opacity:1;transform:none}.hero .ch{animation:none;opacity:1;transform:none}.scroll-line{animation:none;opacity:.6}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="successBanner" role="alert" aria-live="polite">
+  <div class="sb-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+  <div class="sb-text"><strong>Aanmelding ontvangen!</strong> We nemen contact met je op zodra jouw testblik klaarstaat.</div>
+  <button class="sb-close" id="closeBanner" type="button" aria-label="Melding sluiten">&times;</button>
+</div>
+<div class="brand">OERTHEL</div>
+
+<main>
+  <section class="stage hero" aria-label="Welkom">
+    <h1 id="welcome">
+      <span class="small">Welkom bij</span>
+      <span>Oerthel</span>
+    </h1>
+    <div class="scroll-line"></div>
+  </section>
+
+  <section class="stage"><p class="line reveal">Modern,<br><em>maar toch tijdloos.</em></p></section>
+
+  <section class="stage"><p class="line reveal"><span class="num">1</span><span class="num-label">ingrediënt.</span></p></section>
+
+  <section class="stage"><p class="line reveal"><span class="num">225<small style="font-size:.25em;letter-spacing:-.02em;margin-left:.1em">mg</small></span><span class="num-label">natuurlijk cafeïne.</span></p></section>
+
+  <section class="products" id="test">
+    <div class="test-note reveal">
+      <h2>Jij hoort bij de eersten.</h2>
+      <p>OERTHEL is nog niet te koop in Nederland. Voor de lancering zoeken we een kleine groep mensen die het blik gratis wil testen. Jij kunt er een van zijn.</p>
+      <p><b>Drink het, vorm je mening en vertel ons eerlijk wat je ervan vindt. Daar bouwen we mee verder.</b></p>
+    </div>
+
+    <h2 class="pick-title reveal">Kies je blik</h2>
+    <p class="pick-sub reveal">Tik op BLACK of WHITE om te kiezen.</p>
+    <div class="cans reveal" id="cans" role="group" aria-label="Kies je blik">
+      <button type="button" class="can" data-value="OERTHEL BLACK SYSTEM01" aria-pressed="false">
+        <div class="can-img"><img src="oerthelblack-can.png" alt="OERTHEL BLACK blik" loading="lazy"></div>
+        <div class="can-name">BLACK<small>SYSTEM01™</small></div>
+        <span class="pick-btn">Kies BLACK</span>
+      </button>
+      <button type="button" class="can" data-value="OERTHEL WHITE SYSTEM02" aria-pressed="false">
+        <div class="can-img"><img src="oerthelwhite-can.png" alt="OERTHEL WHITE blik" loading="lazy"></div>
+        <div class="can-name">WHITE<small>SYSTEM02™</small></div>
+        <span class="pick-btn">Kies WHITE</span>
+      </button>
+    </div>
+
+    <div class="info reveal">
+      <div>
+        <p class="about">Pure espresso, niets toegevoegd. <strong>100% Indonesische Arabica</strong>, 18 uur koud getrokken. Alleen bonen, water en tijd.</p>
+        <p class="ingr"><span>Ingrediënten</span>Water, <b>koffie-extract 14%</b> (Coffea Arabica, Indonesië), van nature aanwezige cafeïne.</p>
+      </div>
+      <div>
+        <p class="about">Dezelfde pure espresso, verzacht met een scheutje melk. <strong>100% Indonesische Arabica</strong>, 18 uur koud getrokken.</p>
+        <p class="ingr"><span>Ingrediënten</span>Water, <b>koffie-extract 14%</b> (Coffea Arabica, Indonesië), <b>havermelk</b>, van nature aanwezige cafeïne.</p>
+      </div>
+    </div>
+
+    <div id="wrap" class="reveal">
+      <form id="form" novalidate>
+        <p class="choice" id="choice" aria-live="polite">Nog geen blik gekozen. Tik hierboven op BLACK of WHITE.</p>
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field"><label for="naam">Naam</label><input id="naam" name="naam" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="email">E-mailadres</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required></div>
+        <div class="field"><label for="adres">Straat en huisnummer</label><input id="adres" name="adres" type="text" autocomplete="street-address" required></div>
+        <div class="row">
+          <div class="field"><label for="pc">Postcode</label><input id="pc" name="postcode" type="text" autocomplete="postal-code" required></div>
+          <div class="field"><label for="plaats">Woonplaats</label><input id="plaats" name="woonplaats" type="text" autocomplete="address-level2" required></div>
+        </div>
+        <button class="go" type="submit">Test gratis</button>
+        <p class="err" id="err" role="alert"></p>
+      </form>
+      <div class="done" id="done">
+        <div class="icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+        <h2>Aanmelding ontvangen. Welkom bij de eersten.</h2>
+        <p>Als testers selecteren wij een kleine groep. Word je gekozen, dan krijg je je blik gratis thuisgestuurd en horen we daarna graag eerlijk wat je ervan vindt.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>OERTHEL · Less ingredients, more focus.</footer>
+
+<script>
+// Letters one by one
+document.querySelectorAll('#welcome span').forEach(function(el,si){
+  var t=el.textContent;el.textContent='';
+  t.split('').forEach(function(c,i){
+    var s=document.createElement('span');s.className='ch';s.textContent=c===' '?'\u00a0':c;
+    s.style.animationDelay=(si*0.5+i*0.07+0.2)+'s';el.appendChild(s);
+  });
+});
+
+// Reveal on scroll (fades in and out)
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){e.target.classList.toggle('in',e.isIntersecting)});
+},{threshold:.4});
+document.querySelectorAll('.stage .reveal').forEach(function(el){io.observe(el)});
+// Product block reveals once
+var io2=new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target)}});
+},{threshold:.15});
+document.querySelectorAll('.products .reveal').forEach(function(el){io2.observe(el)});
+
+// Choice
+var choice='',btns=document.querySelectorAll('.can'),label=document.getElementById('choice');
+btns.forEach(function(b){b.addEventListener('click',function(){
+  btns.forEach(function(x){
+    var on=x===b;x.setAttribute('aria-pressed',on);
+    x.querySelector('.pick-btn').textContent=on?'Gekozen ✓':'Kies '+x.dataset.value.split(' ')[1];
+  });
+  document.getElementById('cans').classList.add('picked');
+  choice=b.dataset.value;label.textContent='Jouw keuze: '+choice+'™';document.getElementById('err').textContent='';
+})});
+
+// Submit — vervang ENDPOINT door je eigen formulier-dienst (bijv. Formspree, Make, Zapier)
+var ENDPOINT='https://formspree.io/f/xrpbvjwj';
+document.getElementById('form').addEventListener('submit',function(e){
+  e.preventDefault();
+  var f=e.target,err=document.getElementById('err');err.textContent='';
+  if(f.website.value)return;
+  if(!choice){err.textContent='Kies eerst BLACK of WHITE.';var c=document.getElementById('cans');c.scrollIntoView({behavior:'smooth',block:'center'});c.classList.remove('nudge');void c.offsetWidth;c.classList.add('nudge');return}
+  var ok=['naam','email','adres','postcode','woonplaats'].every(function(n){return f[n].value.trim()});
+  if(!ok||!/^\S+@\S+\.\S+$/.test(f.email.value)){err.textContent='Vul alle velden in met een geldig e-mailadres.';return}
+  var btn=f.querySelector('button.go');btn.disabled=true;btn.textContent='Versturen…';
+  var data=new FormData(f);data.append('product',choice);data.delete('website');
+  fetch(ENDPOINT,{method:'POST',body:data,headers:{Accept:'application/json'}})
+    .then(function(r){if(!r.ok)throw 0;var w=document.getElementById('wrap'),bn=document.getElementById('successBanner');w.classList.add('sent');bn.classList.add('show');window.scrollTo({top:w.getBoundingClientRect().top+scrollY-140,behavior:'smooth'});setTimeout(function(){bn.classList.remove('show')},8000)})
+    .catch(function(){err.textContent='Versturen mislukt. Probeer het opnieuw.';btn.disabled=false;btn.textContent='Test gratis'});
+});
+</script>
+</body>
+</html>
